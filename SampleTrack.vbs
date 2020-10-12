@@ -9,3 +9,5 @@ min = CLng(Mid(strLength,4,2)*1000*60)
 second = CLng(Mid(strLength,7,2)*1000)
 sleepTime = min+second+100
 WScript.Sleep(sleepTime)
+
+'sample vbs created by the script, not used by program
