@@ -1,4 +1,4 @@
-rem @echo off
+@echo off
 rem keep echo on for debugging
 setlocal enabledelayedexpansion
 
