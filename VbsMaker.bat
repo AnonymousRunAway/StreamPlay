@@ -1,3 +1,5 @@
+@echo off
+rem keep echo on for debugging
 setlocal enabledelayedexpansion
 
 set track=%1
@@ -36,4 +38,3 @@ taskkill /fi "IMAGENAME eq wmplayer.exe"
 taskkill /fi "IMAGENAME eq wmplayer.exe"
 taskkill /fi "IMAGENAME eq wmplayer.exe"
 taskkill /fi "IMAGENAME eq wmplayer.exe"
-echo We are doneecho 
