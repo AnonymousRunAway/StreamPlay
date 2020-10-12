@@ -27,6 +27,10 @@ echo WScript.Echo strLength>>"%track%".vbs
 
 "%track%".vbs
 
+echo %test:~0,-4%>nowPlaying.txt
+
+rem use this file in Streamlabs/Xsplit/OBS as a text source
+
 :continue
 
 del "%track%".vbs
