@@ -1,13 +1,15 @@
-@echo off
+rem @echo off
 rem keep echo on for debugging
 setlocal enabledelayedexpansion
 
 set track=%1
 set track=!track:~1,-1!
 
-set execPath=C:/Users/%USERNAME%/Downloads/Music
+set execPath=%2
+set execPath=!execPath:~1,-1!
 
-set execPathSlashed=C:\Users\%USERNAME%\Downloads\Music
+set execPathSlashed=%3
+set execPathSlashed=!execPathSlashed~1,-1!
 
 rem set execPath and execPathSlashed accordingly. If execPath is C:/Files, execPathSlashed should be C:\Files, with the other slash. 
 

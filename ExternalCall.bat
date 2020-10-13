@@ -1,5 +1,8 @@
-@echo off
-set execPath=%cd%
-for %%f in (%execPath%\*.mp3) do VbsMaker.bat "%%f"
+rem @echo off
+set execPath=C:/Users/%USERNAME%/Downloads/Music
+set execPathSlashed=C:\Users\%USERNAME%\Downloads\Music
+rem change accordingly
+cd /d %execPath%
+for %%f in (*.mp3) do VbsMaker.bat "%%f"
 
 pause
