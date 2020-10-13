@@ -1,5 +1,5 @@
 @echo off
-
-for %%f in (*.mp3) do VbsMaker.bat "%%f"
+set execPath=%cd%
+for %%f in (%execPath%\*.mp3) do VbsMaker.bat "%%f"
 
 pause
