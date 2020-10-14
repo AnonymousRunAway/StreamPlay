@@ -1,4 +1,4 @@
-@echo off
+rem @echo off
 set execPath=C:/Users/jainv/Downloads/Music
 set execPathSlashed=C:\Users\jainv\Downloads\Music
 rem change accordingly
