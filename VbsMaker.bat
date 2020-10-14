@@ -9,7 +9,6 @@ set execPath=%2
 set execPath=!execPath:~1,-1!
 
 set execPathSlashed=%3
-set execPathSlashed=!execPathSlashed~1,-1!
 
 rem set execPath and execPathSlashed accordingly. If execPath is C:/Files, execPathSlashed should be C:\Files, with the other slash. 
 
@@ -18,7 +17,7 @@ echo CreateObject("Wscript.Shell").Run "wmplayer /play /close ""%execPath%/%trac
 echo Const LENGTH = 27>>"%track%".vbs
 
 echo Dim oShell  : Set oShell  = CreateObject("Shell.Application")>>"%track%".vbs
-echo Dim oFolder : Set oFolder = oShell.Namespace("%execPathSlashed%")>>"%track%".vbs
+echo Dim oFolder : Set oFolder = oShell.Namespace(%execPathSlashed%)>>"%track%".vbs
 echo Dim oFile   : Set oFile   = oFolder.ParseName("%track%")>>"%track%".vbs
 
 echo Dim strLength : strLength = oFolder.GetDetailsOf(oFile, LENGTH)>>"%track%".vbs
