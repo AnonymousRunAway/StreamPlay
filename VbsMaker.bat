@@ -13,7 +13,7 @@ echo Dim oShell  : Set oShell  = CreateObject("Shell.Application")>>"%track%".vb
 echo Dim oFolder : Set oFolder = oShell.Namespace(%3)>>"%track%".vbs
 echo Dim oFile   : Set oFile   = oFolder.ParseName("%track%")>>"%track%".vbs
 echo Dim strLength : strLength = oFolder.GetDetailsOf(oFile, 27)>>"%track%".vbs
-echo WScript.Sleep(Mid(strLength,7,2)*1000+Mid(strLength,4,2)*1000*60-1000+Mid(strLength,1,2)*1000*60*60)>>"%track%".vbs
+echo WScript.Sleep(Mid(strLength,7,2)*1000+Mid(strLength,4,2)*1000*60+3000+Mid(strLength,1,2)*1000*60*60)>>"%track%".vbs
 echo %track:~0,-4%>nowPlaying.txt
 
 "%track%".vbs
