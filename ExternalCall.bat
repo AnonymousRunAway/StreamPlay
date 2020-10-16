@@ -1,4 +1,4 @@
-rem @echo off
+@echo off
 set execPath=C:/Users/%USERNAME%/Downloads/Music
 set execPathSlashed=C:\Users\%USERNAME%\Downloads\Music
 rem change accordingly
