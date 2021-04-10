@@ -5,11 +5,10 @@ set execPath=C:/Users/%USERNAME%/Downloads/Stream Music
 set execPathSlashed=C:\Users\%USERNAME%\Downloads\Stream Music
 cd /d %execPath%
 echo Hello^! Let's get you set up.
+echo.
+echo.
+echo.
 :menu
-echo.
-echo Note: ALL PROVIDED FILES must be extracted to %execPath%
-echo.
-echo.
 echo 1. Generate New queue
 echo 2. Play existing queue
 echo 3. Change current directory (effects only for single session)
