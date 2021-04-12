@@ -1,5 +1,6 @@
 # StreamPlay
-A Script to Display Now Playing Song In XSplit/OBS/StreamLabs
+A ready-to-use (plug and play) script to Display Now Playing Song In XSplit/OBS/StreamLabs
+Based On Windows Media Player, Batch and VBScript
 # Getting Started
 First, extract all files from .zip
 1. In Play.bat, Change execPath to the dir where music is located eg. if music dir is C:/Files then execPath=C:/Files and execPahSlashed=C:\Files OR change via menu
