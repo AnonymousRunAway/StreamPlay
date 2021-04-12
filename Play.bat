@@ -1,80 +1,70 @@
 @echo off
-rem keep echo on for debugging
 setlocal enabledelayedexpansion
-set execPath=C:/Users/%USERNAME%/Downloads/Stream Music
-set execPathSlashed=C:\Users\%USERNAME%\Downloads\Stream Music
+set execPath=%cd%
 cd /d %execPath%
-echo Hello^! Let's get you set up.
+if %errorlevel% EQU 1 (pause & CALL :3)
+if not exist %cd%\queue mkdir %cd%\queue & attrib +h %cd%\queue
 :menu
-echo.
-echo Note: ALL PROVIDED FILES must be extracted to %execPath%
-echo.
-echo.
+echo StreamPlay
+echo(
+echo(
 echo 1. Generate New queue
-echo 2. Play existing queue
+echo 2. Play existing queue (type 2 loop for looping of queue)
 echo 3. Change current directory (effects only for single session)
-echo 4. Check other projects on my github! (github.com/anonymousrunaway)
-echo.
+echo(
 set /p todo=Enter choice (number):  
 CALL :%todo%
-if %errorlevel% == 0 (
-     echo Exit Code 0: Sucesfully executed
-	 pause
-) else (
-     echo Execution Failed... Exit Code %errorlevel%. Raise an issue on github or make sure song names do not contain special charachters.
-	 pause
-)
+if %errorlevel% == 0 (echo Exit Code 0: Sucesfully executed & pause) else (echo Execution Failed... Exit Code %errorlevel%. Please raise an issue on github if the issue persists. & pause)
 cls
 goto menu
-
-
 :1
-echo.
-echo.
+echo(
+echo(
 echo Queue Generation:
-echo.
+echo(
 echo 0. Generate Sequential Queue
 echo 1. Generate Randomized Queue
 set /p todo=Enter choice (number) :  
 echo Generating Queue...
-del *.vbs 2>nul
+del %cd%\queue\*.vbs > nul 2>&1
+set /a cnt=0
 for %%f in (*.mp3) do CALL :fn "%%f" %todo%
+echo(
+if %cnt% EQU 0 (echo No mp3 files found. Please check the working directory. Current working directory: %execPath%) else (echo Generated queue for %cnt% mp3 files.)
 EXIT /B 0
-
 :fn
 set /a randomizer=(%random%%%10)*%~2
 set vtrack=%randomizer%%~1
-echo CreateObject("Wscript.Shell").Run "wmplayer /play /close ""%execPath%/%~1""", 0, False>"%vtrack%".vbs
-echo Dim oShell  : Set oShell  = CreateObject("Shell.Application")>>"%vtrack%".vbs
-echo Dim oFolder : Set oFolder = oShell.Namespace("%execPathSlashed%")>>"%vtrack%".vbs
-echo Dim oFile   : Set oFile   = oFolder.ParseName("%~1")>>"%vtrack%".vbs
-echo Dim strLength : strLength = oFolder.GetDetailsOf(oFile, 27)>>"%vtrack%".vbs
-echo WScript.Sleep(Mid(strLength,7,2)*1000+Mid(strLength,4,2)*1000*60+3000+Mid(strLength,1,2)*1000*60*60)>>"%vtrack%".vbs
+set /a cnt+=1
+echo CreateObject("Wscript.Shell").Run "wmplayer /play /close ""%execPath%\%~1""", 0, False>%cd%\queue\"%randomizer%%~1".vbs
+echo Dim oShell  : Set oShell  = CreateObject("Shell.Application")>>%cd%\queue\"%randomizer%%~1".vbs
+echo Dim oFolder : Set oFolder = oShell.Namespace("%execPath%")>>%cd%\queue\"%randomizer%%~1".vbs
+echo Dim oFile   : Set oFile   = oFolder.ParseName("%~1")>>%cd%\queue\"%randomizer%%~1".vbs
+echo Dim strLength : strLength = oFolder.GetDetailsOf(oFile, 27)>>%cd%\queue\"%randomizer%%~1".vbs
+echo WScript.Sleep(Mid(strLength,7,2)*1000+Mid(strLength,4,2)*1000*60+3000+Mid(strLength,1,2)*1000*60*60)>>%cd%\queue\"%randomizer%%~1".vbs
 goto :eof
-
-
 :2
 echo Playing...
-for %%f in (*.vbs) do (CALL :play "%%f")
+ECHO %cd%>x&FOR %%? IN (x) DO SET /A result=%%~z? - 2&del x
+set /a result+=8
+:loop
+for %%f in (%cd%\queue\*.vbs) do (CALL :play "%%f")
+goto %~1
 EXIT /B 0
-
-:4
-echo Redierecting..
-start www.github.com/anonymousrunaway
-EXIT /B 0
-
 :3
-echo.
 echo Quick tip: You can permanently change directory by editing the file itself.
-set /p execPath=Directory with '/' (Forward Slashes)
-set /p execPathSlashed=Directory with '\' (Backward Slashes)
-
+echo(
+set /p todo=Do you want to delete the existing queue in this directory? (y/n)
+if /I %todo%==Y del %cd%\queue\*.vbs & rmdir %cd%\queue
+echo(
+set /p execPath=Directory :
+set execPath=%execPath:/=\%
+cd /d %execPath%
+if not exist %cd%\queue mkdir %cd%\queue & attrib +h %cd%\queue
+EXIT /B 0
 :play
 set track=%~1
-set track = !track:~%currentqueue%!
-echo !track:~1,-8!>nowPlaying.txt
-echo Now Playing: !track:~1,-8!
+echo !track:~%result%,-8!>nowPlaying.txt
+echo Now Playing: !track:~%result%,-8!
 "%track%"
-EXIT /B 0
-
 goto :eof
