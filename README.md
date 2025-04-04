@@ -8,6 +8,3 @@ First, extract all files from .zip
 3. Now Playing song is written inside {current directory}/nowPlaying.txt eg. C:/Files/nowPlaying.txt
 
 Note: The current directory (directory where Play.bat is located) is the working directory.
-
-# Disclaimer
-The author is not responsible for any damage caused by this script. Do not perform edits unless you understand and take full responsibility of what you are doing.
